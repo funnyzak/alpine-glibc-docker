@@ -40,3 +40,8 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases
             "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
             "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
             "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME"
+
+
+RUN apk update && apk upgrade && \
+    apk add --no-cache ca-certificates bash curl wget rsync git gcc openssh make cmake zip unzip gzip bzip2 tar tzdata && \
+    rm  -rf /tmp/* /var/cache/apk/*
