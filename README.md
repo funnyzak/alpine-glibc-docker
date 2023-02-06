@@ -1,11 +1,8 @@
 # Alpine Glibc Docker
 
-A Docker image based on Alpine Linux with glibc installed.
-
 [![Build Status][build-status-image]][build-status]
 [![Docker Stars](https://img.shields.io/docker/stars/funnyzak/alpine-glibc.svg?style=flat-square)](https://hub.docker.com/r/funnyzak/alpine-glibc/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/funnyzak/alpine-glibc.svg?style=flat-square)](https://hub.docker.com/r/funnyzak/alpine-glibc/)
-[![Image Size](https://img.shields.io/docker/image-size/funnyzak/alpine-glibc)](https://hub.docker.com/r/funnyzak/alpine-glibc/)
 ![GitHub release (latest by date)][latest-release]
 ![License][license-image]
 
@@ -20,7 +17,9 @@ A Docker image based on Alpine Linux with glibc installed.
 [latest-commit]: https://img.shields.io/github/last-commit/funnyzak/alpine-glibc-docker
 [latest-release]: https://img.shields.io/github/v/release/funnyzak/alpine-glibc-docker
 
-Download size of this image is:
+The image is based on the [sgerrand/alpine-pkg-glibc](https://github.com/sgerrand/alpine-pkg-glibc/) project, use to provide the GNU C Library (aka glibc) for Alpine Linux.
+
+Download size of this image is only:
 
 [![Image Size](https://img.shields.io/docker/image-size/funnyzak/alpine-glibc)](https://hub.docker.com/r/funnyzak/alpine-glibc/)
 
@@ -40,6 +39,10 @@ docker build \
 --build-arg GLIBC_VERSION="2.34-r0" \
 -t funnyzak/apline-glibc:0.1.0 .
 ```
+
+## References
+
+- [apline-glibc](https://github.com/sgerrand/alpine-pkg-glibc/)
 
 ## Contribution
 
