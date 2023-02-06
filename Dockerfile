@@ -1,12 +1,24 @@
 FROM alpine
-LABEL maintainer="potato<silenceace@gmail.com>" \
-        org.label-schema.name="alpine-glibc" \
-        org.label-schema.version=2.34-r0
+
+ARG BUILD_DATE
+ARG VCS_REF
+ARG GLIBC_VERSION 2.34-r0
+ARG VERSION 1.0.0
+
+LABEL org.label-schema.vendor="Leon<silenceace@gmail.com>" \
+    org.label-schema.name="alpine glic" \
+    org.label-schema.build-date="${BUILD_DATE}" \
+    org.label-schema.description="alpine glic." \
+    org.label-schema.url="https://yycc.me" \
+    org.label-schema.schema-version="${VERSION}"	\
+    org.label-schema.vcs-type="Git" \
+    org.label-schema.vcs-ref="${VCS_REF}" \
+    org.label-schema.vcs-url="https://github.com/funnyzak/alpine-glibc" 
 
 ENV LANG=C.UTF-8
 # Here we install GNU libc (aka glibc) and set C.UTF-8 locale as default.
 RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" && \
-    ALPINE_GLIBC_PACKAGE_VERSION="2.34-r0" && \
+    ALPINE_GLIBC_PACKAGE_VERSION="${GLIBC_VERSION}" && \
     ALPINE_GLIBC_BASE_PACKAGE_FILENAME="glibc-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
     ALPINE_GLIBC_BIN_PACKAGE_FILENAME="glibc-bin-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
     ALPINE_GLIBC_I18N_PACKAGE_FILENAME="glibc-i18n-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
