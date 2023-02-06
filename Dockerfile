@@ -16,6 +16,7 @@ LABEL org.label-schema.vendor="Leon<silenceace@gmail.com>" \
     org.label-schema.vcs-url="https://github.com/funnyzak/alpine-glibc" 
 
 ENV LANG=C.UTF-8
+
 # Here we install GNU libc (aka glibc) and set C.UTF-8 locale as default.
 RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" && \
     ALPINE_GLIBC_PACKAGE_VERSION="${GLIBC_VERSION}" && \
@@ -37,7 +38,7 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases
             "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
             "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
             "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" && \
-        apk add --no-cache libstdc++ \
+        apk add --force-overwrite --no-cache libstdc++ \
             "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
             "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
             "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" && \

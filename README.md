@@ -20,7 +20,6 @@ A Docker image based on Alpine Linux with glibc installed.
 [latest-commit]: https://img.shields.io/github/last-commit/funnyzak/alpine-glibc-docker
 [latest-release]: https://img.shields.io/github/v/release/funnyzak/alpine-glibc-docker
 
-
 Download size of this image is:
 
 [![Image Size](https://img.shields.io/docker/image-size/funnyzak/alpine-glibc)](https://hub.docker.com/r/funnyzak/alpine-glibc/)
@@ -28,6 +27,19 @@ Download size of this image is:
 [Docker hub image: funnyzak/alpine-glibc](https://hub.docker.com/r/funnyzak/alpine-glibc)
 
 **Docker Pull Command**: `docker pull funnyzak/alpine-glibc:latest`
+
+## Docker Build
+
+Following are the build arguments that can be passed to the docker build command.
+
+```bash
+docker build \
+--build-arg VCS_REF=`git rev-parse --short HEAD` \
+--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+--build-arg VERSION="0.1.0" \
+--build-arg GLIBC_VERSION="2.34-r0" \
+-t funnyzak/apline-glibc:0.1.0 .
+```
 
 ## Contribution
 

@@ -15,7 +15,6 @@ on:
         default: 'latest'
 env:
   IMAGE_REPOSITORY: funnyzak/alpine-glibc
-  GLIC_DEFAULT_VERSION: '2.35-r0'
 jobs:
   docker-release:
     name: Publish Docker images
@@ -30,15 +29,16 @@ jobs:
         if: ${{ github.event.inputs.glic_version != '' }}
         run: |
           echo "GLIBC_VERSION=${{ github.event.inputs.glic_version }}" >> $GITHUB_ENV
-      - name: Get glic version from default
+      - name: get glibc release version from github sgerrand/alpine-pkg-glibc
         if: ${{ github.event.inputs.glic_version == '' }}
         run: |
-          echo "GLIBC_VERSION=${{ env.GLIC_DEFAULT_VERSION }}" >> $GITHUB_ENV
+          GLIBC_VERSION=$(curl -s https://api.github.com/repos/sgerrand/alpine-pkg-glibc/releases/latest | grep tag_name | cut -d '"' -f 4)
+          echo "GLIBC_VERSION=${GLIBC_VERSION}" >> $GITHUB_ENV
       - name: Set Variables
         run: |
           echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
           echo "BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
-      - name: Get version from input if verson is set 
+      - name: Get version from input 
         if: ${{ github.event.inputs.version != '' }}
         run: |
           echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
