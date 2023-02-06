@@ -42,7 +42,15 @@ jobs:
         if: ${{ github.event.inputs.version != '' }}
         run: |
           echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
-      - name: Echo Variables
+      - name: Build changelog
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@v3.6.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          configuration: '.github/config/changelog_configuration.json'
+          ignorePreReleases: 'false'
+      - name: Print variables
         run: |
           echo "VERSION=${{ env.VERSION }}"
           echo "GLIBC_VERSION=${{ env.GLIBC_VERSION }}"
@@ -52,7 +60,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build and push
+      - name: Docker build and push
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -67,8 +75,12 @@ jobs:
             ${{ env.IMAGE_REPOSITORY }}:latest
           platforms: |
             linux/amd64
-            linux/arm64
-            linux/arm/v7
+      - name: Github release
+        uses: softprops/action-gh-release@v1
+        with:
+          body: ${{steps.build_changelog.outputs.changelog}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
   push-message:
       name: Push message
       runs-on: ubuntu-latest
