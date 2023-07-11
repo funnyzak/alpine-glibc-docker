@@ -2,14 +2,14 @@ FROM alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
-ARG GLIBC_VERSION 2.34-r0
-ARG VERSION 1.0.0
+ARG GLIBC_VERSION 2.35-r1
+ARG VERSION 0.1.2
 
 LABEL org.label-schema.vendor="Leon<silenceace@gmail.com>" \
     org.label-schema.name="alpine glic" \
     org.label-schema.build-date="${BUILD_DATE}" \
     org.label-schema.description="alpine glic." \
-    org.label-schema.url="https://yycc.me" \
+    org.label-schema.url="https://yycc.dev" \
     org.label-schema.schema-version="${VERSION}"	\
     org.label-schema.vcs-type="Git" \
     org.label-schema.vcs-ref="${VCS_REF}" \
