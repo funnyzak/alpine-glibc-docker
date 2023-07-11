@@ -75,8 +75,6 @@ jobs:
             ${{ env.IMAGE_REPOSITORY }}:latest
           platforms: |
             linux/amd64
-            linux/arm64
-            linux/arm/v7
       - name: Github release
         uses: softprops/action-gh-release@v1
         with:
